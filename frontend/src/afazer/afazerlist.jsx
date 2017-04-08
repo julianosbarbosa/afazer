@@ -8,9 +8,13 @@ export default props=>{
 
         return list.map(afazer => (
             <tr key={afazer._id}>
-                <td>{afazer.description}</td>
+                <td className={afazer.done ? 'markedAsDone': ''}>{afazer.description}</td>
                 <td>
-                    <IconButton style="danger" icon="trash-o"
+                    <IconButton style="success" icon="check" hide={afazer.done}
+                     onClick={()=>props.handleMarckAsDone(afazer)}></IconButton>
+                     <IconButton style="warning" icon="undo" hide={!afazer.done}
+                     onClick={()=>props.handleMarckAsPending(afazer)}></IconButton>
+                    <IconButton style="danger" icon="trash-o" hide={!afazer.done}
                      onClick={()=>props.handleRemove(afazer)}></IconButton>
                 </td>
             </tr>
@@ -21,6 +25,7 @@ export default props=>{
             <thead>
                 <tr>
                     <th>Descrição</th>
+                    <th className="tableActions">Ações</th>
                 </tr>
             </thead>
             <tbody>
